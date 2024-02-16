@@ -46,4 +46,9 @@ public class QuestionServiceImpl implements QuestionService {
         repository.delete(question);
         return question;
     }
+
+    @Override
+    public List<Question> getQuestionByCategory(String category) {
+        return repository.findByCategory(category);
+    }
 }

@@ -42,4 +42,11 @@ public class QuestionController {
         return ResponseEntity.ok("question has been added to the question pool successfully");
     }
 
+    @GetMapping("/category/{category}")
+    public ResponseEntity<List<Question>> getQuestionsByCategory(@PathVariable String category){
+       List<Question> questions = questionService.getQuestionByCategory(category);
+       return ResponseEntity.ok(questions);
+
+    }
+
 }

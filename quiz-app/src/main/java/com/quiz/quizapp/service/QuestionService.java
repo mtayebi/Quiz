@@ -14,4 +14,5 @@ public interface QuestionService {
     Question updateQuestion(Question question);
     Question deleteQuestion(long id);
 
+    List<Question> getQuestionByCategory(String category);
 }
