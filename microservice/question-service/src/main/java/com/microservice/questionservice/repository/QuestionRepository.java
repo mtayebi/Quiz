@@ -9,6 +9,6 @@ import java.util.List;
 public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     List<Question> findByCategory(String category);
-    @Query(value = "SELECT * FROM Question q WHERE q.category=:category order by Random() limit :numOfQuestions", nativeQuery = true)
-    List<Question> generateQuiz(String category, int numOfQuestions);
+    @Query(value = "SELECT q.id FROM Question q WHERE q.category=:category order by Random() limit :numOfQuestions", nativeQuery = true)
+    List<Long> generateQuiz(String category, int numOfQuestions);
 }

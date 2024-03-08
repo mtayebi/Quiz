@@ -1,5 +1,6 @@
 package com.microservice.questionservice.controller;
 
+import com.microservice.questionservice.dto.Answers;
 import com.microservice.questionservice.dto.QuestionDto;
 import com.microservice.questionservice.mapper.QuestionToQuestionDto;
 
@@ -50,8 +51,23 @@ public class QuestionController {
 
     }
 
-    // generate
-    // get questions by question id
-    // calculate score
+    // generate quiz
+    @GetMapping("/generate")
+    public ResponseEntity<List<Long>> generate(@RequestParam String category, @RequestParam int numOfQ){
+        List<Long> questionsListNumber = questionService.getnearte(category, numOfQ);
+        return ResponseEntity.ok(questionsListNumber);
+    }
 
+    // get questions by list of question ids
+    @PostMapping("/get-questions")
+    public ResponseEntity<List<QuestionDto>> getQuestionsByListOfIds(@RequestBody List<Long> questionsList){
+        List<QuestionDto> questionDtos = questionService.getListOfQuestions(questionsList);
+        return ResponseEntity.ok(questionDtos);
+    }
+    // calculate score
+    @PostMapping("/get-score")
+    public ResponseEntity<String> getScore(@RequestBody List<Answers> answers){
+        float score = questionService.getScore(answers);
+        return ResponseEntity.ok("You passed the exam by grade: " + score );
+    }
 }
