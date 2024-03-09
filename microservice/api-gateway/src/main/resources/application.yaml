@@ -1,0 +1,21 @@
+server:
+  port: 8765
+spring:
+  application:
+    name: API-GATEWAY-SERVICE
+  cloud:
+    gateway:
+      routes:
+        - id: QUESTION-SERVICE
+          uri: http://localhost:8081
+          predicates:
+            - Path=/question/**
+        - id: QUIZ-SERVICE
+          uri: http://localhost:8082
+          predicates:
+            - Path=/quiz/**
+
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
